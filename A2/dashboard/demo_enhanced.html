@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A2 - Asistente Virtual Inteligente - Demo</title>
+    <link rel="stylesheet" href="static/CSS/styles_enhanced.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loading-content">
+        <div class="loading-logo">
+          <div class="logo-icon">A2</div>
+        </div>
+        <div class="loading-text">Iniciando Asistente Virtual...</div>
+        <div class="loading-bar">
+          <div class="loading-progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <div class="logo-icon">A2</div>
+          <span class="logo-text">Asistente</span>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="menu-section">
+          <div class="menu-item active" data-section="dashboard">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </div>
+          <div class="menu-item" data-section="commands">
+            <i class="fas fa-terminal"></i>
+            <span>Comandos</span>
+          </div>
+          <div class="menu-item" data-section="history">
+            <i class="fas fa-history"></i>
+            <span>Historial</span>
+          </div>
+          <div class="menu-item" data-section="settings">
+            <i class="fas fa-cog"></i>
+            <span>Configuración</span>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="menu-item" data-section="voice">
+            <i class="fas fa-microphone"></i>
+            <span>Voz</span>
+          </div>
+          <div class="menu-item" data-section="ai">
+            <i class="fas fa-brain"></i>
+            <span>IA</span>
+          </div>
+          <div class="menu-item" data-section="games">
+            <i class="fas fa-gamepad"></i>
+            <span>Juegos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="status-indicator">
+          <div class="status-dot online"></div>
+          <span>Conectado</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <h1 class="page-title">Dashboard</h1>
+          <div class="breadcrumb">
+            <span>Inicio</span>
+            <i class="fas fa-chevron-right"></i>
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-actions">
+            <button class="action-btn" id="voiceToggle">
+              <i class="fas fa-microphone"></i>
+              <span>Voz</span>
+            </button>
+            <button class="action-btn" id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-menu">
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Section -->
+      <section class="content-section active" id="dashboard">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-terminal"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">127</div>
+              <div class="stat-label">Comandos Ejecutados</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Tasa de Éxito</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">02:34:15</div>
+              <div class="stat-label">Tiempo Activo</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">43</div>
+              <div class="stat-label">Consultas IA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-container">
+          <div class="chat-header">
+            <h3>Asistente A2</h3>
+            <div class="chat-controls">
+              <button class="control-btn" id="clearChat">
+                <i class="fas fa-trash"></i>
+              </button>
+              <button class="control-btn" id="exportChat">
+                <i class="fas fa-download"></i>
+              </button>
+            </div>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+              <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="message-content">
+                <div class="message-text">
+                  ¡Hola! Soy A2, tu asistente virtual inteligente. ¿En qué puedo
+                  ayudarte hoy?
+                </div>
+                <div class="message-time">14:32</div>
+              </div>
+            </div>
+            <div class="message user-message">
+              <div class="message-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="message-content">
+                <div class="message-text">Busca información sobre Python</div>
+                <div class="message-time">14:33</div>
+              </div>
+            </div>
+            <div class="message bot-message">
+              <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="message-content">
+                <div class="message-text">
+                  He encontrado información sobre Python en Wikipedia. Python es
+                  un lenguaje de programación de alto nivel, interpretado y de
+                  propósito general...
+                </div>
+                <div class="message-time">14:33</div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input-container">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="messageInput"
+                placeholder="Escribe un comando o pregunta..."
+                autocomplete="off"
+              />
+              <button class="send-btn" id="sendBtn">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+              <button class="voice-btn" id="voiceBtn">
+                <i class="fas fa-microphone"></i>
+              </button>
+            </div>
+            <div class="quick-commands">
+              <button class="quick-cmd" data-command="youtube">
+                🎵 YouTube
+              </button>
+              <button class="quick-cmd" data-command="wikipedia">
+                📚 Wikipedia
+              </button>
+              <button class="quick-cmd" data-command="search">🔍 Buscar</button>
+              <button class="quick-cmd" data-command="ai">🤖 IA</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Commands Section -->
+      <section class="content-section" id="commands">
+        <div class="section-header">
+          <h2>Comandos Disponibles</h2>
+          <p>Explora todos los comandos disponibles en A2</p>
+        </div>
+        <div class="commands-grid">
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-icon">
+                <i class="fab fa-youtube"></i>
+              </div>
+              <div class="command-title">youtube</div>
+            </div>
+            <div class="command-description">Reproduce videos de YouTube</div>
+            <div class="command-keywords">
+              <span class="keyword">youtube</span>
+              <span class="keyword">reproduce</span>
+            </div>
+          </div>
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-icon">
+                <i class="fab fa-wikipedia-w"></i>
+              </div>
+              <div class="command-title">wikipedia</div>
+            </div>
+            <div class="command-description">
+              Busca información en Wikipedia
+            </div>
+            <div class="command-keywords">
+              <span class="keyword">wikipedia</span>
+              <span class="keyword">busca en wikipedia</span>
+            </div>
+          </div>
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-icon">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="command-title">buscar</div>
+            </div>
+            <div class="command-description">Busca en el navegador</div>
+            <div class="command-keywords">
+              <span class="keyword">buscar</span>
+            </div>
+          </div>
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="command-title">ai</div>
+            </div>
+            <div class="command-description">
+              Consulta a la IA de Google Gemini
+            </div>
+            <div class="command-keywords">
+              <span class="keyword">ai</span>
+              <span class="keyword">inteligencia artificial</span>
+            </div>
+          </div>
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-icon">
+                <i class="fas fa-music"></i>
+              </div>
+              <div class="command-title">spotify</div>
+            </div>
+            <div class="command-description">Busca música en Spotify</div>
+            <div class="command-keywords">
+              <span class="keyword">spotify</span>
+            </div>
+          </div>
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-icon">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="command-title">whatsapp</div>
+            </div>
+            <div class="command-description">Envía mensajes por WhatsApp</div>
+            <div class="command-keywords">
+              <span class="keyword">whatsapp</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Section -->
+      <section class="content-section" id="history">
+        <div class="section-header">
+          <h2>Historial de Comandos</h2>
+          <div class="history-controls">
+            <button class="btn-secondary" id="clearHistory">
+              <i class="fas fa-trash"></i>
+              Limpiar Historial
+            </button>
+            <button class="btn-secondary" id="exportHistory">
+              <i class="fas fa-download"></i>
+              Exportar
+            </button>
+          </div>
+        </div>
+        <div class="history-container">
+          <div class="history-filters">
+            <select id="historyFilter">
+              <option value="all">Todos los comandos</option>
+              <option value="successful">Exitosos</option>
+              <option value="failed">Fallidos</option>
+              <option value="ai">Consultas IA</option>
+            </select>
+            <input
+              type="text"
+              id="historySearch"
+              placeholder="Buscar en historial..."
+            />
+          </div>
+          <div class="history-list">
+            <div class="history-item">
+              <div class="history-header">
+                <div class="history-command">wikipedia</div>
+                <div class="history-time">14:33</div>
+              </div>
+              <div class="history-status success">success</div>
+              <div class="history-text">Busca información sobre Python</div>
+              <div class="history-output">
+                Información encontrada en Wikipedia sobre Python...
+              </div>
+            </div>
+            <div class="history-item">
+              <div class="history-header">
+                <div class="history-command">youtube</div>
+                <div class="history-time">14:25</div>
+              </div>
+              <div class="history-status success">success</div>
+              <div class="history-text">Reproduce música relajante</div>
+            </div>
+            <div class="history-item">
+              <div class="history-header">
+                <div class="history-command">ai</div>
+                <div class="history-time">14:20</div>
+              </div>
+              <div class="history-status success">success</div>
+              <div class="history-text">¿Cuál es la capital de Francia?</div>
+              <div class="history-output">
+                La capital de Francia es París...
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section class="content-section" id="settings">
+        <div class="section-header">
+          <h2>Configuración</h2>
+          <p>Personaliza tu experiencia con A2</p>
+        </div>
+        <div class="settings-container">
+          <div class="settings-tabs">
+            <button class="settings-tab active" data-tab="general">
+              General
+            </button>
+            <button class="settings-tab" data-tab="voice">Voz</button>
+            <button class="settings-tab" data-tab="ai">IA</button>
+            <button class="settings-tab" data-tab="appearance">
+              Apariencia
+            </button>
+          </div>
+          <div class="settings-content">
+            <div class="settings-panel active" id="general">
+              <div class="setting-group">
+                <h3>Configuración General</h3>
+                <div class="setting-item">
+                  <label>Nombre del Asistente</label>
+                  <input type="text" id="assistantName" value="A2" />
+                </div>
+                <div class="setting-item">
+                  <label>Idioma</label>
+                  <select id="language">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" id="autoStart" checked />
+                    Iniciar automáticamente
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="settings-panel" id="voice">
+              <div class="setting-group">
+                <h3>Configuración de Voz</h3>
+                <div class="setting-item">
+                  <label>Velocidad de Voz</label>
+                  <input
+                    type="range"
+                    id="voiceRate"
+                    min="50"
+                    max="200"
+                    value="145"
+                  />
+                  <span id="voiceRateValue">145</span>
+                </div>
+                <div class="setting-item">
+                  <label>Volumen</label>
+                  <input
+                    type="range"
+                    id="voiceVolume"
+                    min="0"
+                    max="100"
+                    value="80"
+                  />
+                  <span id="voiceVolumeValue">80</span>
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" id="voiceEnabled" checked />
+                    Habilitar reconocimiento de voz
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="settings-panel" id="ai">
+              <div class="setting-group">
+                <h3>Configuración de IA</h3>
+                <div class="setting-item">
+                  <label>API Key de Google Gemini</label>
+                  <input
+                    type="password"
+                    id="apiKey"
+                    placeholder="Ingresa tu API key"
+                  />
+                </div>
+                <div class="setting-item">
+                  <label>Modelo de IA</label>
+                  <select id="aiModel">
+                    <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                    <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" id="aiEnabled" checked />
+                    Habilitar consultas de IA
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="settings-panel" id="appearance">
+              <div class="setting-group">
+                <h3>Apariencia</h3>
+                <div class="setting-item">
+                  <label>Tema</label>
+                  <select id="theme">
+                    <option value="dark">Oscuro</option>
+                    <option value="light">Claro</option>
+                    <option value="auto">Automático</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label>Color Principal</label>
+                  <input type="color" id="primaryColor" value="#667eea" />
+                </div>
+                <div class="setting-item">
+                  <label>
+                    <input type="checkbox" id="animations" checked />
+                    Habilitar animaciones
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Voice Section -->
+      <section class="content-section" id="voice">
+        <div class="section-header">
+          <h2>Control de Voz</h2>
+          <p>Interactúa con A2 usando comandos de voz</p>
+        </div>
+        <div class="voice-container">
+          <div class="voice-visualizer">
+            <div class="voice-circle" id="voiceCircle">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <div class="voice-status">Presiona para hablar</div>
+          </div>
+          <div class="voice-controls">
+            <button class="voice-control-btn" id="startListening">
+              <i class="fas fa-play"></i>
+              Iniciar Escucha
+            </button>
+            <button class="voice-control-btn" id="stopListening" disabled>
+              <i class="fas fa-stop"></i>
+              Detener Escucha
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI Section -->
+      <section class="content-section" id="ai">
+        <div class="section-header">
+          <h2>Inteligencia Artificial</h2>
+          <p>Configura y utiliza las capacidades de IA de A2</p>
+        </div>
+        <div class="ai-container">
+          <div class="ai-chat">
+            <div class="ai-messages" id="aiMessages">
+              <div class="ai-message">
+                <div class="ai-avatar">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <div class="ai-content">
+                  <div class="ai-text">
+                    ¡Hola! Soy la IA de A2. Puedo ayudarte con preguntas,
+                    análisis de datos, generación de código y mucho más.
+                  </div>
+                </div>
+              </div>
+              <div class="ai-message user-message">
+                <div class="ai-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="ai-content">
+                  <div class="ai-text">
+                    ¿Puedes explicarme qué es machine learning?
+                  </div>
+                </div>
+              </div>
+              <div class="ai-message">
+                <div class="ai-avatar">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <div class="ai-content">
+                  <div class="ai-text">
+                    Machine Learning es una rama de la inteligencia artificial
+                    que permite a las máquinas aprender y mejorar
+                    automáticamente a partir de la experiencia sin ser
+                    programadas explícitamente...
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ai-input">
+              <input
+                type="text"
+                id="aiInput"
+                placeholder="Pregúntame algo..."
+              />
+              <button id="aiSend">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Games Section -->
+      <section class="content-section" id="games">
+        <div class="section-header">
+          <h2>Minijuegos</h2>
+          <p>Diviértete con los juegos integrados en A2</p>
+        </div>
+        <div class="games-grid">
+          <div class="game-card" data-game="tetris">
+            <div class="game-icon">
+              <i class="fas fa-th"></i>
+            </div>
+            <h3>Tetris</h3>
+            <p>El clásico juego de bloques</p>
+            <button class="play-btn">Jugar</button>
+          </div>
+          <div class="game-card" data-game="snake">
+            <div class="game-icon">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <h3>Snake</h3>
+            <p>Controla la serpiente</p>
+            <button class="play-btn">Jugar</button>
+          </div>
+          <div class="game-card" data-game="pong">
+            <div class="game-icon">
+              <i class="fas fa-circle"></i>
+            </div>
+            <h3>Pong</h3>
+            <p>El clásico juego de ping pong</p>
+            <button class="play-btn">Jugar</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Notifications -->
+    <div class="notifications" id="notifications">
+      <div class="notification success">
+        ¡Bienvenido a A2! El asistente está listo para ayudarte.
+      </div>
+    </div>
+
+    <!-- Game Modals -->
+    <div class="game-modal" id="gameModal">
+      <div class="game-container">
+        <div class="game-header">
+          <h3 id="gameTitle">Juego</h3>
+          <button class="close-game" id="closeGame">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="game-content" id="gameContent">
+          <!-- Game content will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo JavaScript -->
+    <script>
+      // Demo functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        // Hide loading screen
+        setTimeout(() => {
+          document.getElementById("loadingScreen").classList.add("hidden");
+        }, 2000);
+
+        // Sidebar toggle
+        document
+          .getElementById("sidebarToggle")
+          .addEventListener("click", () => {
+            document.getElementById("sidebar").classList.toggle("collapsed");
+          });
+
+        // Menu navigation
+        document.querySelectorAll(".menu-item").forEach((item) => {
+          item.addEventListener("click", (e) => {
+            const section = e.currentTarget.dataset.section;
+
+            // Update active menu item
+            document
+              .querySelectorAll(".menu-item")
+              .forEach((mi) => mi.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+
+            // Show section
+            document
+              .querySelectorAll(".content-section")
+              .forEach((s) => s.classList.remove("active"));
+            document.getElementById(section).classList.add("active");
+
+            // Update page title
+            const titles = {
+              dashboard: "Dashboard",
+              commands: "Comandos",
+              history: "Historial",
+              settings: "Configuración",
+              voice: "Control de Voz",
+              ai: "Inteligencia Artificial",
+              games: "Minijuegos",
+            };
+            document.querySelector(".page-title").textContent =
+              titles[section] || "Dashboard";
+          });
+        });
+
+        // Settings tabs
+        document.querySelectorAll(".settings-tab").forEach((tab) => {
+          tab.addEventListener("click", (e) => {
+            const tabId = e.currentTarget.dataset.tab;
+
+            // Update active tab
+            document
+              .querySelectorAll(".settings-tab")
+              .forEach((t) => t.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+
+            // Show panel
+            document
+              .querySelectorAll(".settings-panel")
+              .forEach((p) => p.classList.remove("active"));
+            document.getElementById(tabId).classList.add("active");
+          });
+        });
+
+        // Voice controls
+        document
+          .getElementById("startListening")
+          .addEventListener("click", () => {
+            const circle = document.getElementById("voiceCircle");
+            const status = document.querySelector(".voice-status");
+
+            circle.classList.add("listening");
+            status.textContent = "Escuchando...";
+
+            setTimeout(() => {
+              circle.classList.remove("listening");
+              status.textContent = "Presiona para hablar";
+            }, 3000);
+          });
+
+        // Game cards
+        document.querySelectorAll(".game-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            const game = card.dataset.game;
+            const modal = document.getElementById("gameModal");
+            const title = document.getElementById("gameTitle");
+            const content = document.getElementById("gameContent");
+
+            title.textContent = game.charAt(0).toUpperCase() + game.slice(1);
+            content.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #a0aec0; font-size: 1.2rem;">🎮 ${
+              game.charAt(0).toUpperCase() + game.slice(1)
+            } Game</div>`;
+
+            modal.classList.add("active");
+          });
+        });
+
+        // Close game modal
+        document.getElementById("closeGame").addEventListener("click", () => {
+          document.getElementById("gameModal").classList.remove("active");
+        });
+
+        // Theme toggle
+        document.getElementById("themeToggle").addEventListener("click", () => {
+          const icon = document.querySelector("#themeToggle i");
+          if (icon.classList.contains("fa-moon")) {
+            icon.className = "fas fa-sun";
+          } else {
+            icon.className = "fas fa-moon";
+          }
+        });
+
+        // Range inputs
+        document.getElementById("voiceRate").addEventListener("input", (e) => {
+          document.getElementById("voiceRateValue").textContent =
+            e.target.value;
+        });
+
+        document
+          .getElementById("voiceVolume")
+          .addEventListener("input", (e) => {
+            document.getElementById("voiceVolumeValue").textContent =
+              e.target.value;
+          });
+
+        // Auto-hide notification
+        setTimeout(() => {
+          const notification = document.querySelector(".notification");
+          if (notification) {
+            notification.style.opacity = "0";
+            setTimeout(() => notification.remove(), 300);
+          }
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>

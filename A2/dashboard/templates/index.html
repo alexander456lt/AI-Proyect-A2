@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presentamos A2</title>
+    <link rel="stylesheet" href="../static/CSS/styles.css" />
+  </head>
+  <body>
+    <div class="floating-elements">
+      <div class="floating-circle circle-1"></div>
+      <div class="floating-circle circle-2"></div>
+      <div class="floating-circle circle-3"></div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <svg
+        class="sidebar-icon menu-toggle"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        onclick="toggleSidebar()"
+      >
+        <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+      </svg>
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+        />
+      </svg>
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5S17.59 5 12 5 5 7.01 5 9.5 7.01 14 12 14c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+        />
+      </svg>
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+        />
+      </svg>
+    </div>
+
+    <div class="sidebar-expanded" id="sidebarExpanded">
+      <div class="sidebar-header">
+        <div class="sidebar-title">🚀 ChatA2</div>
+        <button class="close-sidebar" onclick="closeSidebar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.91-1.01L12 2z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+          <span>Nueva Conversación</span>
+        </div>
+
+        <div class="sidebar-menu-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M14,2H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V8L14,2M18,20H8V7h11v14z"
+            />
+          </svg>
+          <span>Historial de Chats</span>
+        </div>
+
+        <div class="sidebar-menu-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+            />
+          </svg>
+          <span>Favoritos</span>
+        </div>
+
+        <div class="sidebar-menu-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+            />
+          </svg>
+          <span>Explorar A2s</span>
+        </div>
+
+        <div class="sidebar-menu-item" onclick="showThemeSelector()">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"
+            />
+          </svg>
+          <span>Temas de Color</span>
+        </div>
+
+        <div class="sidebar-menu-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12,18H13V16H12V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C16.41,20 12,20Z"
+            />
+          </svg>
+          <span>Ayuda y FAQ</span>
+        </div>
+
+        <div class="sidebar-menu-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"
+            />
+          </svg>
+          <span>Cerrar Sesión</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div
+      id="settingsModal"
+      class="settings-panel-overlay"
+      style="display: none"
+    >
+        <div class="settings-panel">
+          <div class="settings-panel-header">
+            <h2 class="settings-panel-title">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="settings-title-icon"
+              >
+                <path
+                  d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm7.43 4c0-.64-.1-1.25-.29-1.82l2.11-1.65-2-3.46-2.49 1a7.007 7.007 0 0 0-3.75-2.17V4h-4v2.9a7.007 7.007 0 0 0-3.75 2.17l-2.49-1-2 3.46 2.11 1.65c-.19.57-.29 1.18-.29 1.82s.1 1.25.29 1.82l-2.11 1.65 2 3.46 2.49-1a7.007 7.007 0 0 0 3.75 2.17V20h4v-2.9a7.007 7.007 0 0 0 3.75-2.17l2.49 1 2-3.46-2.11-1.65c.19-.57.29-1.18.29-1.82z"
+                />
+              </svg>
+              Panel de Configuración
+            </h2>
+            <button
+              class="settings-panel-close"
+              onclick="closeSettingsModal()"
+              title="Cerrar"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.91 18.91 12 13.41 17.59 18.91 19 17.59 13.41 12 19 6.41z"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="settings-panel-body">
+            <nav class="settings-panel-nav">
+              <div class="settings-nav-header">
+                <span class="nav-header-text">Configuración</span>
+              </div>
+              <ul class="settings-nav-list">
+                <li
+                  class="settings-nav-item active"
+                  onclick="openTab(event, 'personalization')"
+                >
+                  <div class="nav-item-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
+                      />
+                      <path
+                        d="M19.43 12.98c0-.64-.1-1.25-.29-1.82l2.11-1.65-2-3.46-2.49 1a7.007 7.007 0 0 0-3.75-2.17V4h-4v2.9a7.007 7.007 0 0 0-3.75 2.17l-2.49-1-2 3.46 2.11 1.65c-.19.57-.29 1.18-.29 1.82s.1 1.25.29 1.82l-2.11 1.65 2 3.46 2.49-1a7.007 7.007 0 0 0 3.75 2.17V20h4v-2.9a7.007 7.007 0 0 0 3.75-2.17l2.49 1 2-3.46-2.11-1.65c.19-.57.29-1.18.29-1.82z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="nav-item-text">Personalización</span>
+                  <div class="nav-item-arrow">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+                      />
+                    </svg>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+
+            <section class="settings-panel-content">
+              <div id="personalization" class="settings-tab-content active">
+                <div class="content-header">
+                  <h3 class="content-title">Personalización</h3>
+                  <p class="content-subtitle">
+                    Personaliza la apariencia de tu asistente
+                  </p>
+                </div>
+                <div class="content-body">
+                  <div class="setting-group">
+                    <h4>Temas de color</h4>
+                    <div class="theme-selector-title">
+                      Selecciona un tema de color
+                    </div>
+                    <div class="color-themes">
+                      <div
+                        class="theme-option active"
+                        onclick="changeTheme('purple')"
+                      >
+                        <div class="theme-preview theme-purple"></div>
+                        <div class="theme-name">Púrpura</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('ocean')">
+                        <div class="theme-preview theme-ocean"></div>
+                        <div class="theme-name">Océano</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('sunset')">
+                        <div class="theme-preview theme-sunset"></div>
+                        <div class="theme-name">Atardecer</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('forest')">
+                        <div class="theme-preview theme-forest"></div>
+                        <div class="theme-name">Bosque</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('cosmic')">
+                        <div class="theme-preview theme-cosmic"></div>
+                        <div class="theme-name">Cósmico</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('aurora')">
+                        <div class="theme-preview theme-aurora"></div>
+                        <div class="theme-name">Aurora</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('teal')">
+                        <div class="theme-preview theme-teal"></div>
+                        <div class="theme-name">Aguamarina</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('white')">
+                        <div class="theme-preview theme-white"></div>
+                        <div class="theme-name">Blanco</div>
+                      </div>
+                      <div class="theme-option" onclick="changeTheme('black')">
+                        <div class="theme-preview theme-black"></div>
+                        <div class="theme-name">Negro</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+          />
+        </svg>
+        ChatA2
+      </div>
+    </header>
+
+    <main class="main-content">
+      <h1 class="hero-title">Presentamos A2</h1>
+      <p class="hero-subtitle">
+        ChatA2 ahora cuenta con nuestro modelo más inteligente, rápido y útil
+        hasta la fecha, con razonamiento integrado, para que siempre obtengas la
+        mejor respuesta.
+      </p>
+
+      <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+          <div class="chat-message bot-message">
+            <strong>A2:</strong> Hola, soy tu asistente A2. ¿En qué puedo
+            ayudarte?
+          </div>
+        </div>
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Escribe un comando (ej: 'buscar python')"
+            id="commandInput"
+          />
+          <div class="search-icons">
+            <svg
+              class="search-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              onclick="sendCommand()"
+            >
+              <path
+                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Configuration Button -->
+    <button
+      class="config-button"
+      onclick="openSettingsModal()"
+      title="Configuración"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm7.43 4c0-.64-.1-1.25-.29-1.82l2.11-1.65-2-3.46-2.49 1a7.007 7.007 0 0 0-3.75-2.17V4h-4v2.9a7.007 7.007 0 0 0-3.75 2.17l-2.49-1-2 3.46 2.11 1.65c-.19.57-.29 1.18-.29 1.82s.1 1.25.29 1.82l-2.11 1.65 2 3.46 2.49-1a7.007 7.007 0 0 0 3.75 2.17V20h4v-2.9a7.007 7.007 0 0 0 3.75-2.17l2.49 1 2-3.46-2.11-1.65c.19-.57.29-1.18.29-1.82z"
+        />
+      </svg>
+    </button>
+
+    <!-- Added Matrix Rain canvas -->
+    <canvas
+      id="matrixCanvas"
+      class="matrix-canvas"
+      style="display: none"
+    ></canvas>
+
+    <!-- Added Tetris game modal -->
+    <div id="tetrisModal" class="tetris-modal" style="display: none">
+      <div class="tetris-container">
+        <div class="tetris-header">
+          <h2>🎮 Tetris</h2>
+          <button class="close-tetris" onclick="closeTetris()">×</button>
+        </div>
+        <div class="tetris-game">
+          <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+          <div class="tetris-info">
+            <div class="score-display">
+              <div>Puntuación: <span id="score">0</span></div>
+              <div>Nivel: <span id="level">1</span></div>
+              <div>Líneas: <span id="lines">0</span></div>
+            </div>
+            <div class="tetris-controls">
+              <div>← → Mover</div>
+              <div>↓ Bajar rápido</div>
+              <div>↑ Rotar</div>
+              <div>Espacio: Pausa</div>
+            </div>
+            <button id="startButton" onclick="startTetris()">
+              Iniciar Juego
+            </button>
+            <button
+              id="pauseButton"
+              onclick="pauseTetris()"
+              style="display: none"
+            >
+              Pausar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Socket.IO client library -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="../static/js/command_detector.js"></script>
+    <script src="../static/js/script.js"></script>
+  </body>
+</html>
