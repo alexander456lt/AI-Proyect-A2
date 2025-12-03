@@ -1,12 +1,4 @@
-# 🚀 Mejoras de la Interfaz A2 - Dashboard Mejorado
 
-## 📋 Resumen de Mejoras
-
-He creado una interfaz web completamente renovada para tu proyecto A2 con un diseño moderno, responsive y rico en funcionalidades. La nueva interfaz incluye múltiples secciones, mejor UX/UI y características avanzadas.
-
-## 🎨 Características Principales
-
-### 1. **Diseño Moderno y Responsive**
 
 - **Sistema de colores mejorado** con variables CSS personalizables
 - **Tipografía moderna** usando Inter font
